@@ -48,6 +48,11 @@ li::before {
   text-align: center;
 }
 
+#juego{
+  width: 600px;
+  height: 600px;
+}
+
 #juego div {
   text-align: center;
   animation: fadein 2s;
