@@ -1,5 +1,11 @@
 // Arreglo que contiene las intrucciones del juego 
-var instrucciones = [];
+var instrucciones = [
+  'Con las flechas mueve las piezas hasta encontrar el orden correcto',
+  'lorem ipsum 2',
+  'lorem ipsum 3',
+  'lorem ipsum 4',
+];
+
 // Arreglo para ir guardando los movimientos que se vayan realizando
 var movimientos = [];
 
@@ -16,16 +22,49 @@ Esta posición comienza siendo la [2, 2]*/
 var filaVacia = 2;
 var columnaVacia = 2;
 
+/*=============================================
+= KEVEN - PASO N° 2 GUÍA                      =
+=============================================*/
+
 /* Esta función deberá recorrer el arreglo de instrucciones pasado por parámetro. 
 Cada elemento de este arreglo deberá ser mostrado en la lista con id 'lista-instrucciones'. 
 Para eso deberás usar la función ya implementada mostrarInstruccionEnLista().
 Podés ver su implementación en la ultima parte de este codigo. */
+/*
+** KEVEN **
+** Realicé un ciclo for, tomaNdo la longiTud del array de instrucciones, cree una variable llamada instrucción que es la que se encarga de almacenar el dato recogido por el ciclo y posteriormente ejecuté la función "mostarInstruccionesELista" y le pase por parámetro la variable 'instruccion'
+*/
 function mostrarInstrucciones(instrucciones) {
-    //COMPLETAR
+  //COMPLETAR
+  for(let i= 0; i < instrucciones.length; i++){
+    var instruccion = instrucciones[i];
+    mostrarInstruccionEnLista(instruccion);
+  }
 }
 
+/*============  End of Section  =============*/
+
+
+/*=============================================
+=  KEVEN - PASO N° 3 GUÍA                     =
+=============================================*/
 /* COMPLETAR: Crear función que agregue la última dirección al arreglo de movimientos
 y utilice actualizarUltimoMovimiento para mostrarlo en pantalla */
+
+/*
+Cree una función llamada teclaPreiosonada y le pase por parametro 'tecla' el cual se encarga de capturar el código de la tecla presionada 'tecla.keyCode' y lo alamceno en una variable llamada dirección la cual la envío al array de movientos y ejecuto la función actualizarUltimoMovimiento pasando por parametro 'dirección' y  por último con window.onekeydown ejecuto la función teclaPresionada
+*/
+
+function teclaPresionada(tecla) {
+  var direccion = tecla.keyCode;
+  movimientos.push(direccion);
+  actualizarUltimoMovimiento(direccion);
+}
+
+window.onkeydown=teclaPresionada;
+
+/*============  End of KEVEN - PASO N° 3 GUÍA  =============*/
+
 
 /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
 Existen diferentes formas de hacer este chequeo a partir de la grilla. */
@@ -181,7 +220,7 @@ function actualizarUltimoMovimiento(direccion) {
 con idLista. Se crea un elemento li dinámicamente con el texto 
 pasado con el parámetro "instrucción". */
 function mostrarInstruccionEnLista(instruccion, idLista) {
-  var ul = document.getElementById(idLista);
+  var ul = document.getElementById('lista-instrucciones');
   var li = document.createElement("li");
   li.textContent = instruccion;
   ul.appendChild(li);
@@ -196,8 +235,11 @@ function mezclarPiezas(veces) {
     return;
   }
   
-  var direcciones = [codigosDireccion.ABAJO, codigosDireccion.ARRIBA,
-      codigosDireccion.DERECHA, codigosDireccion.IZQUIERDA
+  var direcciones = [
+      codigosDireccion.ABAJO, 
+      codigosDireccion.ARRIBA,
+      codigosDireccion.DERECHA, 
+      codigosDireccion.IZQUIERDA
     ];
 
   var direccion = direcciones[Math.floor(Math.random() * direcciones.length)];
@@ -240,6 +282,7 @@ function iniciar() {
     mostrarInstrucciones(instrucciones);
     mezclarPiezas(30);
     capturarTeclas();
+    // onkeydown=(teclaPresionada(event));
 }
 
 // Ejecutamos la función iniciar
